@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Interactivo del Mercado: BMW Serie 1 en Alemania</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 60vh;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #0c4a6e;
+            border-bottom-color: #0c4a6e;
+        }
+        .filter-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-btn.active {
+            background-color: #082f49;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<div id="app" class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">Análisis de Mercado: BMW Serie 1 (F21)</h1>
+            <p class="text-lg text-slate-600">Una guía interactiva para encontrar un vehículo usado en Alemania</p>
+        </header>
+
+        <nav class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-10 py-3 mb-12 border-b border-slate-200">
+            <ul class="flex items-center justify-center space-x-4 sm:space-x-8 text-sm sm:text-base font-medium text-slate-600">
+                <li><a href="#video-explicativo" class="nav-link border-b-2 border-transparent pb-1">Video</a></li>
+                <li><a href="#referencia" class="nav-link border-b-2 border-transparent pb-1">Su Búsqueda</a></li>
+                <li><a href="#realidad" class="nav-link border-b-2 border-transparent pb-1">Realidad del Mercado</a></li>
+                <li><a href="#explorador" class="nav-link border-b-2 border-transparent pb-1">Explorador</a></li>
+                <li><a href="#consejos" class="nav-link border-b-2 border-transparent pb-1">Guía de Compra</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="video-explicativo" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Video Explicativo del Análisis</h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">
+                    Vea este video para un análisis más profundo sobre el mercado y los precios del BMW Serie 1.
+                </p>
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
+                    <div class="relative" style="padding-bottom: 56.25%;">
+                        <iframe
+                            src="http://www.youtube.com/watch?v=UcSWQ6CGAeI"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="absolute top-0 left-0 w-full h-full rounded-b-2xl"
+                        ></iframe>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Mercado BMW Serie 1 Análisis de Precios y Estado</h3>
+                        <p class="text-sm text-slate-600">Por Tu primer motor a fondo</p>
+                    </div>
+                </div>
+            </section>
+            <section id="referencia" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Punto de Partida: Su Vehículo de Referencia</h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">
+                    Su búsqueda se basa en un BMW 114i con un precio muy específico. Sin embargo, el factor más importante de este vehículo es su estado, que redefine por completo las expectativas del mercado a este nivel de precio.
+                </p>
+                <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-amber-500">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-semibold text-sky-800">BMW 114i 3-puertas (F21)</p>
+                                <h3 class="text-2xl font-bold text-slate-900">Vehículo de Referencia</h3>
+                            </div>
+                            <div class="bg-red-600 text-white text-xs font-bold uppercase px-3 py-1.5 rounded-full">
+                                No Apto para Circular
+                            </div>
+                        </div>
+                        <p class="text-xs text-red-700 font-semibold mt-1">Estado: "Nicht fahrtauglich"</p>
+                        
+                        <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+                            <div class="flex flex-col">
+                                <span class="text-slate-500">Precio</span>
+                                <span class="font-bold text-2xl text-slate-800">3.299 €</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-500">Potencia</span>
+                                <span class="font-semibold text-slate-800">75 kW (102 CV)</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-500">Kilometraje</span>
+                                <span class="font-semibold">226.894 km</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-500">Matriculación</span>
+                                <span class="font-semibold">12/2012</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 bg-amber-50 border border-amber-200 text-amber-900 text-sm p-4 rounded-lg">
+                            <p><strong class="font-semibold">Observación Crítica:</strong> El precio excepcionalmente bajo de este vehículo se debe directamente a que no está en condiciones de circular. Este es el dato clave que explica por qué es difícil encontrar coches *funcionales* a este precio.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="realidad" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">La Realidad del Mercado: Precio vs. Estado</h2>
+                   <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">
+                    Los gráficos a continuación ilustran la relación entre el precio, el kilometraje y el estado de los vehículos. Permiten comparar su presupuesto con los precios de mercado de coches funcionales y ver cómo los defectos mecánicos afectan drásticamente al valor.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">Comparativa de Precios (Vehículos Funcionales)</h3>
+                        <div class="chart-container">
+                            <canvas id="priceComparisonChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2 text-center">Precio vs. Kilometraje y Estado</h3>
+                           <div class="flex justify-center space-x-2 mb-4">
+                            <button class="filter-btn scatter-filter-btn active text-xs px-3 py-1 rounded-full bg-slate-200 text-slate-700" data-filter="all">Todos</button>
+                            <button class="filter-btn scatter-filter-btn text-xs px-3 py-1 rounded-full bg-slate-200 text-slate-700" data-filter="funcional">Funcional</button>
+                            <button class="filter-btn scatter-filter-btn text-xs px-3 py-1 rounded-full bg-slate-200 text-slate-700" data-filter="defecto">Con Defectos</button>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="priceMileageScatterPlot"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="explorador" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Explorador de Mercado Interactivo</h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">
+                    Utilice los filtros para explorar una selección de vehículos disponibles en el mercado alemán. Compare directamente las opciones funcionales, las que tienen defectos conocidos y las alternativas como el BMW 116i.
+                </p>
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
+                    <button class="filter-btn explorer-filter-btn active px-4 py-2 text-sm font-medium rounded-full bg-slate-200" data-filter="all">Mostrar Todos</button>
+                    <button class="filter-btn explorer-filter-btn px-4 py-2 text-sm font-medium rounded-full bg-slate-200" data-filter="funcional">Solo Funcionales</button>
+                    <button class="filter-btn explorer-filter-btn px-4 py-2 text-sm font-medium rounded-full bg-slate-200" data-filter="defecto">Con Defectos</button>
+                    <button class="filter-btn explorer-filter-btn px-4 py-2 text-sm font-medium rounded-full bg-slate-200" data-filter="114i">Solo 114i</button>
+                    <button class="filter-btn explorer-filter-btn px-4 py-2 text-sm font-medium rounded-full bg-slate-200" data-filter="116i">Solo 116i</button>
+                </div>
+                <div id="car-listings" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+            </section>
+
+            <section id="consejos" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4 text-center">Guía Esencial del Comprador</h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">
+                    Comprar un coche de alto kilometraje requiere atención al detalle. Estos son los puntos más importantes a considerar más allá del precio para evitar costes inesperados.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
+                        <div class="text-4xl mb-3">🚨</div>
+                        <h4 class="font-bold text-lg text-slate-900">Vehículos "No Aptos"</h4>
+                        <p class="text-sm text-slate-600 mt-2">Un precio muy bajo casi siempre significa reparaciones costosas. El ahorro inicial puede evaporarse rápidamente.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
+                        <div class="text-4xl mb-3">🛡️</div>
+                        <h4 class="font-bold text-lg text-slate-900">El Sello TÜV</h4>
+                        <p class="text-sm text-slate-600 mt-2">Una inspección técnica (TÜV) reciente y válida es su mejor garantía de que el coche es seguro y apto para circular.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
+                        <div class="text-4xl mb-3">🔍</div>
+                        <h4 class="font-bold text-lg text-slate-900">Inspección Profesional</h4>
+                        <p class="text-sm text-slate-600 mt-2">No negocie sin una Inspección Pre-Compra (IPC) por un mecánico de confianza. Es crucial para descubrir problemas ocultos.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200">
+                        <div class="text-4xl mb-3">🌍</div>
+                        <h4 class="font-bold text-lg text-slate-900">Listados "Export/Händler"</h4>
+                        <p class="text-sm text-slate-600 mt-2">Estos coches suelen tener defectos importantes y se venden sin garantías, principalmente a distribuidores o para exportación. Máxima precaución.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="recomendaciones" class="bg-sky-900 text-white rounded-2xl p-8 lg:p-12">
+                <h2 class="text-3xl font-bold mb-4 text-center">Recomendaciones Estratégicas</h2>
+                <p class="text-center text-sky-200 max-w-3xl mx-auto mb-8">
+                    Para encontrar un vehículo fiable y maximizar el valor de su inversión, considere los siguientes pasos:
+                </p>
+                <ul class="space-y-4 max-w-2xl mx-auto">
+                    <li class="flex items-start">
+                        <span class="text-sky-300 font-bold text-2xl mr-4">1.</span>
+                        <div>
+                            <h4 class="font-semibold">Reevaluar el Presupuesto</h4>
+                            <p class="text-sky-200 text-sm">Un BMW Serie 1 funcional de esta época costará más de 4.500-5.000 €. Ajustar el presupuesto es el paso más realista.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-300 font-bold text-2xl mr-4">2.</span>
+                        <div>
+                            <h4 class="font-semibold">Ser Flexible con el Modelo</h4>
+                            <p class="text-sky-200 text-sm">Considere el BMW 116i. Ofrece un poco más de potencia y hay más opciones funcionales en un rango de precio similar.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-300 font-bold text-2xl mr-4">3.</span>
+                        <div>
+                            <h4 class="font-semibold">Priorizar la Condición sobre el Kilometraje</h4>
+                            <p class="text-sky-200 text-sm">Un coche con más kilómetros pero con TÜV reciente y un buen historial de mantenimiento es una mejor inversión que uno más barato con problemas.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-sky-300 font-bold text-2xl mr-4">4.</span>
+                        <div>
+                            <h4 class="font-semibold">Nunca Comprar a Ciegas</h4>
+                            <p class="text-sky-200 text-sm">Insista siempre en una Inspección Pre-Compra (IPC). Es su mejor defensa contra una mala inversión.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 text-sm text-slate-500">
+            <p>Este análisis interactivo se basa en datos de mercado recopilados para la búsqueda de un BMW Serie 1. Los precios y la disponibilidad son ilustrativos y están sujetos a cambios.</p>
+        </footer>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const carData = [
+        { model: '114i', doors: 3, ez: '12/2012', km: 226894, kw: 75, price: 3299, condition: 'defecto', notes: 'No apto para circular (Referencia)', location: 'Núremberg' },
+        { model: '114i', doors: 'N/A', ez: '11/2013', km: 109000, kw: 75, price: 2900, condition: 'defecto', notes: 'Problemas de motor, para exportación', location: 'Solingen' },
+        { model: '114i', doors: 'N/A', ez: 'N/A', km: 'N/A', kw: 75, price: 3990, condition: 'defecto', notes: 'Fallo en la dirección', location: 'N/A' },
+        { model: '114i', doors: 'N/A', ez: '12/2012', km: 142000, kw: 75, price: 3000, condition: 'funcional', notes: 'Vendedor particular, posible buena oferta', location: 'Künzelsau' },
+        { model: '114i', doors: 'N/A', ez: '09/2014', km: 295600, kw: 75, price: 3200, condition: 'funcional', notes: 'Kilometraje muy alto', location: 'Kiefersfelden' },
+        { model: '114i', doors: 5, ez: '09/2012', km: 145582, kw: 75, price: 4250, condition: 'funcional', notes: 'Kilometraje inferior a la referencia', location: 'N/A' },
+        { model: '114i', doors: 5, ez: '12/2012', km: 200000, kw: 75, price: 4790, condition: 'funcional', notes: 'Alto kilometraje, funcional', location: 'Bielefeld' },
+        { model: '114i', doors: 'N/A', ez: '12/2013', km: 161000, kw: 75, price: 5790, condition: 'funcional', notes: 'TÜV hasta 04/2027', location: 'Viernheim' },
+        { model: '114i', doors: 5, ez: '12/2013', km: 199178, kw: 75, price: 5800, condition: 'funcional', notes: 'Alto kilometraje, funcional', location: 'Waldfischbach' },
+        { model: '116i', doors: 5, ez: '05/2011', km: 200000, kw: 90, price: 3333, condition: 'funcional', notes: 'Alternativa potente', location: 'Baiersdorf' },
+        { model: '116i', doors: 'N/A', ez: '06/2011', km: 200000, kw: 90, price: 3800, condition: 'funcional', notes: 'TÜV hasta 10/2026', location: 'Gerolzhofen' },
+        { model: '116i', doors: 2, ez: '04/2012', km: 190000, kw: 90, price: 3800, condition: 'funcional', notes: 'Variante Coupé', location: 'Wiesbaden' },
+        { model: '116i', doors: 5, ez: '04/2011', km: 188000, kw: 90, price: 3900, condition: 'funcional', notes: 'Alternativa potente', location: 'Haan' },
+        { model: '116i', doors: 'N/A', ez: '09/2011', km: 101000, kw: 90, price: 3999, condition: 'funcional', notes: 'Kilometraje notablemente bajo', location: 'N/A' },
+    ];
+
+    const getConditionStyling = (condition) => {
+        if (condition === 'defecto') {
+            return {
+                bgColor: 'bg-red-50',
+                borderColor: 'border-red-500',
+                textColor: 'text-red-700',
+                label: 'Con Defectos'
+            };
+        }
+        return {
+            bgColor: 'bg-green-50',
+            borderColor: 'border-green-500',
+            textColor: 'text-green-700',
+            label: 'Funcional'
+        };
+    };
+
+    const listingsContainer = document.getElementById('car-listings');
+    carData.forEach(car => {
+        const { bgColor, borderColor, textColor, label } = getConditionStyling(car.condition);
+        const card = `
+            <div class="car-card bg-white rounded-2xl shadow-md overflow-hidden transition-transform transform hover:scale-105 border-t-4 ${borderColor}" data-model="${car.model.toLowerCase()}" data-condition="${car.condition}">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                           <h4 class="font-bold text-lg text-slate-800">BMW ${car.model}</h4>
+                           <span class="text-xs font-bold uppercase px-2 py-1 rounded-full ${bgColor} ${textColor}">${label}</span>
+                    </div>
+                    <p class="text-sm text-slate-600 font-medium">${car.notes}</p>
+                    <div class="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                        <div class="flex flex-col"><span class="text-slate-500 text-xs">Precio</span><span class="font-semibold">${new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(car.price)}</span></div>
+                        <div class="flex flex-col"><span class="text-slate-500 text-xs">KM</span><span class="font-semibold">${new Intl.NumberFormat('de-DE').format(car.km)}</span></div>
+                        <div class="flex flex-col"><span class="text-slate-500 text-xs">Año</span><span class="font-semibold">${car.ez}</span></div>
+                        <div class="flex flex-col"><span class="text-slate-500 text-xs">Potencia</span><span class="font-semibold">${car.kw} kW</span></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        listingsContainer.innerHTML += card;
+    });
+
+    const explorerFilterButtons = document.querySelectorAll('.explorer-filter-btn');
+    const carCards = document.querySelectorAll('.car-card');
+
+    explorerFilterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            explorerFilterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const filter = button.dataset.filter;
+
+            carCards.forEach(card => {
+                const model = card.dataset.model;
+                const condition = card.dataset.condition;
+                let show = false;
+                if (filter === 'all') {
+                    show = true;
+                } else if (filter === 'funcional' || filter === 'defecto') {
+                    if (condition === filter) show = true;
+                } else if (filter === '114i' || filter === '116i') {
+                    if (model === filter) show = true;
+                }
+                
+                if (show) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    const priceCtx = document.getElementById('priceComparisonChart').getContext('2d');
+    const priceComparisonChart = new Chart(priceCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Su Presupuesto', 'Gama Baja Funcional', 'Gama Media Funcional'],
+            datasets: [{
+                label: 'Precio (€)',
+                data: [3299, 4500, 7000],
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.6)',
+                    'rgba(251, 146, 60, 0.6)',
+                    'rgba(34, 197, 94, 0.6)',
+                ],
+                borderColor: [
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(251, 146, 60, 1)',
+                    'rgba(34, 197, 94, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false },
+                title: { display: false },
+                   tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.x !== null) {
+                                label += new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(context.parsed.x);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '€' + new Intl.NumberFormat('de-DE').format(value);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const scatterCtx = document.getElementById('priceMileageScatterPlot').getContext('2d');
+    const baseScatterData = carData.map(car => ({
+        x: car.km,
+        y: car.price,
+        condition: car.condition,
+        model: car.model,
+        notes: car.notes
+    }));
+    
+    let scatterPlot = new Chart(scatterCtx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Funcional',
+                data: baseScatterData.filter(d => d.condition === 'funcional'),
+                backgroundColor: 'rgba(34, 197, 94, 0.7)',
+                borderColor: 'rgba(22, 163, 74, 1)',
+                pointRadius: 6,
+                pointHoverRadius: 8,
+            }, {
+                label: 'Con Defectos',
+                data: baseScatterData.filter(d => d.condition === 'defecto'),
+                backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                borderColor: 'rgba(220, 38, 38, 1)',
+                pointRadius: 6,
+                pointHoverRadius: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const d = context.raw;
+                            return [
+                                `Modelo: BMW ${d.model}`,
+                                `Precio: ${new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(d.y)}`,
+                                `KM: ${new Intl.NumberFormat('de-DE').format(d.x)}`,
+                                `Nota: ${d.notes}`
+                            ];
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Kilometraje (km)'
+                    },
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return (value / 1000) + 'k';
+                        }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Precio (€)'
+                    },
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return '€' + (value / 1000) + 'k';
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const scatterFilterButtons = document.querySelectorAll('.scatter-filter-btn');
+    scatterFilterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            scatterFilterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const filter = button.dataset.filter;
+
+            if (filter === 'all') {
+                scatterPlot.data.datasets[0].data = baseScatterData.filter(d => d.condition === 'funcional');
+                scatterPlot.data.datasets[1].data = baseScatterData.filter(d => d.condition === 'defecto');
+            } else if (filter === 'funcional') {
+                scatterPlot.data.datasets[0].data = baseScatterData.filter(d => d.condition === 'funcional');
+                scatterPlot.data.datasets[1].data = [];
+            } else if (filter === 'defecto') {
+                scatterPlot.data.datasets[0].data = [];
+                scatterPlot.data.datasets[1].data = baseScatterData.filter(d => d.condition === 'defecto');
+            }
+            scatterPlot.update();
+        });
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
